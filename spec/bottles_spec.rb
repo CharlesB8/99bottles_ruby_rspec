@@ -15,7 +15,7 @@ RSpec.describe "Bottles" do
       end
     end
 
-    xcontext "when the verse is 3" do
+    context "when the verse is 3" do
       let(:expected) {
         "3 bottles of beer on the wall, " +
         "3 bottles of beer.\n" +
@@ -28,7 +28,7 @@ RSpec.describe "Bottles" do
       end
     end
 
-    xcontext "when the verse is 2" do
+    context "when the verse is 2" do
       let(:expected) {
         "2 bottles of beer on the wall, " +
         "2 bottles of beer.\n" +
@@ -41,7 +41,7 @@ RSpec.describe "Bottles" do
       end
     end
 
-    xcontext "when the verse is 1" do
+    context "when the verse is 1" do
       let(:expected) {
         "1 bottle of beer on the wall, " +
         "1 bottle of beer.\n" +
@@ -54,7 +54,7 @@ RSpec.describe "Bottles" do
       end
     end
 
-    xcontext "when the verse is 0" do
+    context "when the verse is 0" do
       let(:expected) {
         "No more bottles of beer on the wall, " +
         "no more bottles of beer.\n" +
@@ -68,7 +68,7 @@ RSpec.describe "Bottles" do
     end
   end
 
-  xdescribe "#verses" do
+  describe "#verses" do
     context "when given a span of 2 verses" do
       let(:expected) {
         "99 bottles of beer on the wall, " +
