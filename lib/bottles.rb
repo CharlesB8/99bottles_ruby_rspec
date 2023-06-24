@@ -4,10 +4,19 @@ class Bottles
   end
 
   def verses(num1, num2)
+    num_of_verses = num1 - num2 + 1
     results = []
-    length = num1 - num2 + 1
-    length.times { results << verse(num1) + "\n" }
-    results.to_s
+    num_of_verses.times do
+      results << verse(num1)
+      break if num1 == num2
+      results << "\n"
+      num1 -= 1
+    end
+    results.join
+  end
+
+  def song
+    verses(99, 0)
   end
 
   private

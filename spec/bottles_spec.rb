@@ -1,5 +1,11 @@
 require_relative '../lib/bottles'
 
+RSpec.configure do |rspec|
+  rspec.expect_with :rspec do |c|
+    c.max_formatted_output_length = 1000
+  end
+end
+
 RSpec.describe "Bottles" do
   describe "#verse" do
     context "when the verse is 99" do
@@ -111,7 +117,7 @@ RSpec.describe "Bottles" do
     end
   end
 
-  xdescribe "#song" do
+  describe "#song" do
     let(:expected) {
       <<~SONG
         99 bottles of beer on the wall, 99 bottles of beer.
