@@ -4,48 +4,40 @@ class BottleNumber
     @number = number
   end
 
+  def self.for(number)
+    case number
+    when 0
+      BottleNumber0
+    when 1
+      BottleNumber1
+    else
+      BottleNumber
+      # That's interesting! Every block of code is an object!
+    end.new(number)
+  end
+
   # As pointed out in 6.1; In a real scenario you probably need a more general .to_s method
   def to_s
     "#{quantity} #{container}"
   end
 
   def quantity
-    if number == 0
-      "no more"
-    else
-      number.to_s
-    end
+    number.to_s
   end
 
   def container
-    if number == 1
-      "bottle"
-    else
-      "bottles"
-    end
+    "bottles"
   end
 
   def action
-    if number == 0
-      "Go to the store and buy some more"
-    else
-      "Take #{pronoun} down and pass it around"
-    end
+    "Take #{pronoun} down and pass it around"
   end
 
   def pronoun
-    if number == 1
-      "it"
-    else
-      "one"
-    end
+    "one"
   end
 
   def successor
-    if number == 0
-      99
-    else
-      number - 1
-    end
+    BottleNumber.for(number - 1)
   end
 end
