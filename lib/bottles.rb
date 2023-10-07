@@ -1,46 +1,26 @@
+require_relative 'bottle_number'
 class Bottles
-  def verse(num)
-    define_verse_1(num) + define_verse_2(num-1)
-  end
-
-  def verses(num1, num2)
-    num_of_verses = num1 - num2 + 1
-    results = []
-    num_of_verses.times do
-      results << verse(num1)
-      break if num1 == num2
-      results << "\n"
-      num1 -= 1
-    end
-    results.join
-  end
 
   def song
     verses(99, 0)
   end
 
-  private
-
-  def determine_plural(num)
-    return "bottles" if num > 1
-    "bottle"
+  # This method is kind of crazy looking, not sure if I like it
+  def verses(upper, lower)
+    upper.downto(lower).collect {|i| verse(i)}.join("\n")
   end
 
-  def define_verse_1(num)
-    if num > 0
-      "#{num} #{determine_plural num} of beer on the wall, #{num} #{determine_plural num} of beer."
-    else
-      "No more bottles of beer on the wall, no more bottles of beer."
-    end
-  end
+  def verse(number)
+    # Each verse will create two instances for BottleNumber. Not exactly sure
+    # why we need to make a brand new instance for the last line of the verse
+    bottle_number = BottleNumber.new(number)
+    next_bottle_number = BottleNumber.new(bottle_number.successor)
 
-  def define_verse_2(num)
-    if num > 0
-      "\nTake one down and pass it around, #{num} #{determine_plural num} of beer on the wall.\n"
-    elsif num == -1
-      "\nGo to the store and buy some more, 99 bottles of beer on the wall.\n"
-    else
-      "\nTake it down and pass it around, no more bottles of beer on the wall.\n"
-    end
+    # String interpolation invokes .to_s, so all we need to do is put the object inside
+    # #{} to get the container and quantity, as defined in the BottleNumber .to_s method
+    "#{bottle_number} of beer on the wall, ".capitalize +
+    "#{bottle_number} of beer.\n" +
+    "#{bottle_number.action}, " +
+    "#{next_bottle_number} of beer on the wall.\n"
   end
 end
