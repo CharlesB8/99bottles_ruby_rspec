@@ -1,6 +1,7 @@
 require_relative 'bottle_number'
 require_relative 'bottle_number0'
 require_relative 'bottle_number1'
+require_relative 'bottle_number6'
 
 class Bottles
 
