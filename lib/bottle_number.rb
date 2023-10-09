@@ -4,15 +4,24 @@ class BottleNumber
     @number = number
   end
 
-  # This form of factory is confusing, and goes against best practices, but it dynamically will select any subclasses
+  # This form of factory is confusing, and goes against best practices, but it dyanamically will select any subclasses
   # that follow the BottleNumber{num} naming convention
+  # def self.for(number)
+  #   begin
+  #     const_get("BottleNumber#{number}")
+  #   rescue NameError
+  #     BottleNumber
+  #     # That's interesting! Every block of code is an object!
+  #   end.new(number)
+  # end
+
+  # I would have never thought of this
   def self.for(number)
-    begin
-      const_get("BottleNumber#{number}")
-    rescue NameError
-      BottleNumber
-      # That's interesting! Every block of code is an object!
-    end.new(number)
+    Hash.new(BottleNumber).merge(
+      0 => BottleNumber0,
+      1 => BottleNumber1,
+      6 => BottleNumber6
+    )[number].new(number)
   end
 
   # As pointed out in 6.1; In a real scenario you probably need a more general .to_s method
