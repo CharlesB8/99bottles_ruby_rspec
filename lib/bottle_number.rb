@@ -16,12 +16,21 @@ class BottleNumber
   # end
 
   # I would have never thought of this
+  # def self.for(number)
+  #   Hash.new(BottleNumber).merge(
+  #     0 => BottleNumber0,
+  #     1 => BottleNumber1,
+  #     6 => BottleNumber6
+  #   )[number].new(number)
+  # end
+
   def self.for(number)
-    Hash.new(BottleNumber).merge(
-      0 => BottleNumber0,
-      1 => BottleNumber1,
-      6 => BottleNumber6
-    )[number].new(number)
+    [BottleNumber6, BottleNumber1, BottleNumber0, BottleNumber].
+      find {|candidate| candidate.handles?(number)}.new(number)
+  end
+
+  def self.handles?(number)
+    true
   end
 
   # As pointed out in 6.1; In a real scenario you probably need a more general .to_s method

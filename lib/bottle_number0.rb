@@ -1,6 +1,10 @@
 require_relative "bottle_number"
 
 class BottleNumber0 < BottleNumber
+
+  def self.handles?(number)
+    number == 0
+  end
   def quantity
     "no more"
   end
