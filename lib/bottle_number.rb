@@ -4,15 +4,12 @@ class BottleNumber
     @number = number
   end
 
+  # This form of factory is confusing, and goes against best practices, but it dynamically will select any subclasses
+  # that follow the BottleNumber{num} naming convention
   def self.for(number)
-    case number
-    when 0
-      BottleNumber0
-    when 1
-      BottleNumber1
-    when 6
-      BottleNumber6
-    else
+    begin
+      const_get("BottleNumber#{number}")
+    rescue NameError
       BottleNumber
       # That's interesting! Every block of code is an object!
     end.new(number)
