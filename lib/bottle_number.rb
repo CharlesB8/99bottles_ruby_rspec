@@ -24,10 +24,24 @@ class BottleNumber
   #   )[number].new(number)
   # end
 
+  # def self.for(number)
+  #   [BottleNumber6, BottleNumber1, BottleNumber0, BottleNumber].
+  #     find {|candidate| candidate.handles?(number)}.new(number)
+  # end
+
   def self.for(number)
-    [BottleNumber6, BottleNumber1, BottleNumber0, BottleNumber].
-      find {|candidate| candidate.handles?(number)}.new(number)
+    registry.find {|candidate| candidate.handles?(number)}.new(number)
   end
+
+  def self.registry
+    @registry ||= []
+  end
+
+  def self.register(candidate)
+    registry.prepend(candidate)
+  end
+
+  BottleNumber.register(self)
 
   def self.handles?(number)
     true
