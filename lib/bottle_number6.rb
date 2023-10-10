@@ -1,6 +1,5 @@
 require_relative "bottle_number"
 class BottleNumber6 < BottleNumber
-  BottleNumber.register(self)
 
   def self.handles?(number)
     number == 6

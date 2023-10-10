@@ -33,15 +33,17 @@ class BottleNumber
     registry.find {|candidate| candidate.handles?(number)}.new(number)
   end
 
+  def self.inherited(candidate)
+    register(candidate)
+  end
+
   def self.registry
-    @registry ||= []
+    @registry ||= [BottleNumber]
   end
 
   def self.register(candidate)
     registry.prepend(candidate)
   end
-
-  BottleNumber.register(self)
 
   def self.handles?(number)
     true
